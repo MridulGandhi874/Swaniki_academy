@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import {
   onIdTokenChanged,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   type User as FirebaseUser,
 } from "firebase/auth";
@@ -114,8 +113,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
       const code = (err as { code?: string }).code;
-      if (code === "auth/popup-blocked" || code === "auth/cancelled-popup-request") {
-        await signInWithRedirect(auth, googleProvider);
+      // Deliberately no signInWithRedirect fallback: it depends on
+      // sessionStorage surviving a full-page round trip to Google and back,
+      // which modern browser storage-partitioning (Safari ITP, Chrome
+      // partitioning, private browsing) frequently breaks with a "missing
+      // initial state" error. Popup doesn't have that failure mode.
+      if (code === "auth/popup-blocked") {
+        throw new Error("Your browser blocked the sign-in popup. Please allow popups for this site and try again.");
+      }
+      if (code === "auth/cancelled-popup-request" || code === "auth/popup-closed-by-user") {
         return;
       }
       throw err;
