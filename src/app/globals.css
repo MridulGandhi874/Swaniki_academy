@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+  --color-accent: #2563eb;
+  --color-accent-bright: #3b82f6;
+  --color-subtext: #6b7280;
+  --color-footer: #111422;
+
+  /* Soft-UI tokens — scoped to the dashboard/admin shell, not the marketing site */
+  --color-soft-canvas: #f5f6fa;
+  --color-soft-slate: #3b4870;
+  --color-soft-slate-light: #4d5a8a;
+  --color-soft-periwinkle: #9ba7e0;
+  --color-soft-surface: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--color-accent);
+  --color-accent-bright: var(--color-accent-bright);
+  --color-subtext: var(--color-subtext);
+  --color-footer: var(--color-footer);
+  --color-soft-canvas: var(--color-soft-canvas);
+  --color-soft-slate: var(--color-soft-slate);
+  --color-soft-slate-light: var(--color-soft-slate-light);
+  --color-soft-periwinkle: var(--color-soft-periwinkle);
+  --color-soft-surface: var(--color-soft-surface);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
