@@ -1281,114 +1281,354 @@ const COURSES: SeedCourse[] = [
     description:
       "Master Python fundamentals — syntax, data structures, functions, and working with real-world data — culminating in a data-driven command-line tool.",
     badge: "Beginner Friendly",
-    totalDays: 16,
+    totalDays: 12,
     rating: 3.5,
     activeStudentCount: 498,
     evaluationCriteria: STANDARD_CRITERIA("Python programming"),
     modules: [
+  {
+    "day": 1,
+    "title": "Python Syntax, Variables & Data Types",
+    "lessons": [
       {
-        day: 1,
-        title: "Python Syntax & Data Structures",
-        lessons: [
-          {
-            title: "Lists, Dicts, and Comprehensions",
-            type: "code",
-            content:
-              "<p>Python's built-in list and dict types, combined with comprehensions, cover most everyday data manipulation. You'll write comprehensions that replace multi-line loops with a single readable expression.</p>",
-            objectives: ["Use list and dict comprehensions idiomatically", "Choose the right built-in data structure for a task"],
-            codeBlocks: [
-              {
-                language: "python",
-                code: "with open('notes.txt') as f:\n    words = f.read().split()\n\ncounts = {}\nfor w in words:\n    counts[w] = counts.get(w, 0) + 1\n\ntop = sorted(counts.items(), key=lambda kv: -kv[1])[:10]",
-              },
-            ],
-          },
+        "title": "Python's Core Data Types",
+        "type": "code",
+        "content": "<p>Python is dynamically typed but every value still has a real type underneath — int, float, str, bool. You'll write small scripts that read input, convert types, and print formatted output.</p>",
+        "objectives": [
+          "Use Python's core data types correctly",
+          "Convert between types explicitly and safely"
         ],
-        handsOnProject: {
-          title: "Word frequency counter",
-          description: "Build a script that counts word frequency in a text file using a dict comprehension.",
-        },
-        assignment: {
-          title: "Data structure choices",
-          instructions: "Explain your data structure choices and their time complexity.",
-        },
-      },
-      {
-        day: 2,
-        title: "Functions, Modules & Virtual Environments",
-        lessons: [
+        "codeBlocks": [
           {
-            title: "Writing Reusable, Testable Functions",
-            type: "code",
-            content:
-              "<p>Clear function signatures and small, focused modules make code testable and reusable. You'll extract logic into a module and set up an isolated virtual environment with pip.</p>",
-            objectives: ["Write reusable functions with clear signatures", "Set up an isolated virtual environment for a project"],
-            codeBlocks: [
-              {
-                language: "python",
-                code: "def word_counts(text: str, *, min_length: int = 1) -> dict[str, int]:\n    words = [w for w in text.split() if len(w) >= min_length]\n    return {w: words.count(w) for w in set(words)}",
-              },
-            ],
-          },
-        ],
-        handsOnProject: {
-          title: "Reusable utility module",
-          description: "Extract your word-counter logic into a reusable, tested module.",
-        },
-        assignment: {
-          title: "Module structure writeup",
-          instructions: "Explain how you organized your code into modules and why.",
-        },
-      },
-      {
-        day: 3,
-        title: "Working with Real-World Data",
-        lessons: [
-          {
-            title: "Parsing JSON/CSV and Handling Errors",
-            type: "code",
-            content:
-              "<p>Real data is messy — missing fields, wrong types, malformed rows. You'll parse JSON and CSV data and handle errors so a few bad rows don't crash the whole script.</p>",
-            objectives: ["Parse and validate real-world JSON/CSV data", "Handle malformed data gracefully without crashing"],
-            codeBlocks: [
-              {
-                language: "python",
-                code: "import csv\n\ncleaned = []\nwith open('data.csv') as f:\n    for row in csv.DictReader(f):\n        try:\n            row['price'] = float(row['price'])\n            cleaned.append(row)\n        except ValueError:\n            print(f\"Skipping malformed row: {row}\")",
-              },
-            ],
-          },
-        ],
-        handsOnProject: {
-          title: "Data cleaner",
-          description: "Build a script that ingests a messy CSV and outputs a cleaned version.",
-        },
-        assignment: {
-          title: "Data quality report",
-          instructions: "Document what data quality issues you found and how you handled each.",
-        },
-      },
-      {
-        day: 4,
-        title: "Capstone: CLI Data Tool",
-        lessons: [
-          {
-            title: "Shipping a Command-Line Tool",
-            type: "assignment",
-            content:
-              "<p>Combine everything into an installable command-line tool using argparse, ready to run against real data files.</p>",
-            objectives: ["Build a CLI tool with argparse", "Package a Python project for distribution"],
-          },
-        ],
-        handsOnProject: {
-          title: "CLI data tool",
-          description: "Ship a command-line tool that processes real data end to end.",
-        },
-        assignment: {
-          title: "Final submission",
-          instructions: "Submit your GitHub repository URL with usage instructions in the README.",
-        },
-      },
+            "language": "python",
+            "code": "age = int(input('Age: '))\nprint(f'In 10 years you will be {age + 10}')",
+            "caption": ""
+          }
+        ]
+      }
     ],
+    "handsOnProject": {
+      "title": "Unit converter script",
+      "description": "Write a script that converts between at least three unit types (e.g., temperature, currency, distance)."
+    },
+    "assignment": {
+      "title": "Type coercion notes",
+      "instructions": "List three places Python's implicit type coercion could surprise a beginner."
+    }
+  },
+  {
+    "day": 2,
+    "title": "Control Flow — Conditionals & Loops",
+    "lessons": [
+      {
+        "title": "if/elif/else and Loops",
+        "type": "code",
+        "content": "<p>Control flow is where a script starts making decisions. You'll practice nested conditionals and both <code>for</code> and <code>while</code> loops on real, non-trivial logic — not just counting to ten.</p>",
+        "objectives": [
+          "Write nested conditional logic",
+          "Choose the right loop type for a given problem"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "for n in range(2, 50):\n    if all(n % d != 0 for d in range(2, n)):\n        print(n)",
+            "caption": "Prime numbers under 50"
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "FizzBuzz-plus",
+      "description": "Extend classic FizzBuzz with two additional custom rules of your own."
+    },
+    "assignment": {
+      "title": "Loop choice writeup",
+      "instructions": "Explain one case where you chose while over for, and why."
+    }
+  },
+  {
+    "day": 3,
+    "title": "Functions & Scope",
+    "lessons": [
+      {
+        "title": "Writing Reusable Functions",
+        "type": "code",
+        "content": "<p>Functions with clear inputs and outputs are the first real abstraction in programming. You'll practice default arguments, keyword arguments, and return values, and see how local scope isolates variables.</p>",
+        "objectives": [
+          "Write functions with default and keyword arguments",
+          "Explain local vs. global scope"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "def total(price, tax_rate=0.18, *, discount=0):\n    return round(price * (1 + tax_rate) - discount, 2)",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Utility function library",
+      "description": "Build a small library of 5+ reusable functions solving real small problems."
+    },
+    "assignment": {
+      "title": "Scope bug writeup",
+      "instructions": "Write and then explain a bug caused by variable scope confusion."
+    }
+  },
+  {
+    "day": 4,
+    "title": "Data Structures — Lists, Tuples, Dicts, Sets",
+    "lessons": [
+      {
+        "title": "Choosing the Right Structure",
+        "type": "code",
+        "content": "<p>Lists, tuples, dictionaries, and sets each trade off mutability, order, and lookup speed differently. You'll solve the same small problem four ways to feel the tradeoffs directly.</p>",
+        "objectives": [
+          "Choose the correct data structure for a given problem",
+          "Use comprehensions to build structures concisely"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "word_counts = {}\nfor w in text.split():\n    word_counts[w] = word_counts.get(w, 0) + 1",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Word frequency counter",
+      "description": "Build a script that counts word frequency in a text file and prints the top 10."
+    },
+    "assignment": {
+      "title": "Structure comparison",
+      "instructions": "Explain when you'd reach for a set instead of a list, with a real example."
+    }
+  },
+  {
+    "day": 5,
+    "title": "String Manipulation & File I/O",
+    "lessons": [
+      {
+        "title": "Reading, Writing, and Parsing Text",
+        "type": "code",
+        "content": "<p>Most real scripts spend their time reading messy text and writing clean output. You'll read a CSV-like file, parse it by hand, and write a cleaned-up version back to disk.</p>",
+        "objectives": [
+          "Read and write files safely with context managers",
+          "Parse and clean unstructured text"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "with open('data.txt') as f:\n    lines = [line.strip() for line in f if line.strip()]",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Log file cleaner",
+      "description": "Write a script that reads a messy log file and outputs a cleaned, structured version."
+    },
+    "assignment": {
+      "title": "Edge case notes",
+      "instructions": "List the malformed lines your parser had to handle and how."
+    }
+  },
+  {
+    "day": 6,
+    "title": "Object-Oriented Python — Classes & Objects",
+    "lessons": [
+      {
+        "title": "Modeling with Classes",
+        "type": "code",
+        "content": "<p>A class bundles data and behavior together. You'll model a real small domain (e.g., a library book, a bank account) with a class that has attributes, methods, and validation.</p>",
+        "objectives": [
+          "Define a class with attributes and methods",
+          "Add basic validation inside a class's methods"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "class Account:\n    def __init__(self, balance=0):\n        self.balance = balance\n    def withdraw(self, amount):\n        if amount > self.balance:\n            raise ValueError('Insufficient funds')\n        self.balance -= amount",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Small domain model",
+      "description": "Model a real-world entity as a class with at least three methods and input validation."
+    },
+    "assignment": {
+      "title": "Design rationale",
+      "instructions": "Explain what state you kept private vs. exposed, and why."
+    }
+  },
+  {
+    "day": 7,
+    "title": "Exception Handling & Debugging",
+    "lessons": [
+      {
+        "title": "try/except and Reading Tracebacks",
+        "type": "code",
+        "content": "<p>Errors are data, not failures to hide. You'll practice catching specific exceptions (not bare <code>except:</code>), raising your own, and reading a Python traceback to find the real cause of a bug.</p>",
+        "objectives": [
+          "Catch specific exceptions with meaningful handling",
+          "Read a traceback to locate a bug's real source"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "try:\n    result = risky_call()\nexcept ValueError as e:\n    logging.warning(f'Bad input: {e}')\n    result = None",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Robust script pass",
+      "description": "Add proper exception handling to a script from earlier in the track."
+    },
+    "assignment": {
+      "title": "Bug hunt writeup",
+      "instructions": "Document a real bug you hit this week and the traceback that led you to it."
+    }
+  },
+  {
+    "day": 8,
+    "title": "Modules & Packages",
+    "lessons": [
+      {
+        "title": "Organizing Code with Modules, pip, and venv",
+        "type": "reading",
+        "content": "<p>As scripts grow, they need to split across files and manage dependencies cleanly. You'll split a script into modules, create a virtual environment, and install a real third-party package.</p>",
+        "objectives": [
+          "Split code across importable modules",
+          "Create and use a virtual environment with pip"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "Multi-file project",
+      "description": "Split one of your earlier scripts into at least three well-organized modules."
+    },
+    "assignment": {
+      "title": "Dependency notes",
+      "instructions": "List what you installed and why, in a requirements.txt."
+    }
+  },
+  {
+    "day": 9,
+    "title": "Intro to NumPy",
+    "lessons": [
+      {
+        "title": "Vectorized Operations with NumPy",
+        "type": "code",
+        "content": "<p>NumPy arrays let you operate on whole collections of numbers at once, dramatically faster than Python loops. You'll compare a loop-based calculation against its vectorized NumPy equivalent.</p>",
+        "objectives": [
+          "Perform vectorized operations with NumPy arrays",
+          "Explain why vectorization is faster than looping"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "import numpy as np\nprices = np.array([100, 250, 75, 400])\ndiscounted = prices * 0.9",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Loop vs. NumPy benchmark",
+      "description": "Time the same calculation done with a Python loop vs. NumPy and compare."
+    },
+    "assignment": {
+      "title": "Benchmark writeup",
+      "instructions": "Report the speed difference and explain why it exists."
+    }
+  },
+  {
+    "day": 10,
+    "title": "Data Handling with Pandas",
+    "lessons": [
+      {
+        "title": "DataFrames for Real Data",
+        "type": "code",
+        "content": "<p>Pandas turns messy tabular data into something you can filter, group, and summarize in a few lines. You'll load a real dataset and answer specific questions about it with DataFrame operations.</p>",
+        "objectives": [
+          "Load and explore a dataset with Pandas",
+          "Filter, group, and aggregate DataFrame data"
+        ],
+        "codeBlocks": [
+          {
+            "language": "python",
+            "code": "import pandas as pd\ndf = pd.read_csv('sales.csv')\ndf.groupby('region')['revenue'].sum().sort_values(ascending=False)",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Dataset exploration",
+      "description": "Answer 5 specific questions about a real dataset using Pandas."
+    },
+    "assignment": {
+      "title": "Findings summary",
+      "instructions": "Write up your findings as if reporting to a non-technical manager."
+    }
+  },
+  {
+    "day": 11,
+    "title": "Automation Mini-Project",
+    "lessons": [
+      {
+        "title": "Automating a Repetitive Task",
+        "type": "assignment",
+        "content": "<p>Take everything so far and automate one genuinely repetitive task — renaming files, generating a report, scraping structured data from a page you control.</p>",
+        "objectives": [
+          "Identify a real repetitive task worth automating",
+          "Build a script that reliably automates it"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "Automation script",
+      "description": "Build a script that automates one real repetitive task end to end."
+    },
+    "assignment": {
+      "title": "Before/after writeup",
+      "instructions": "Document the manual process you replaced and the time it saved."
+    }
+  },
+  {
+    "day": 12,
+    "title": "Capstone: CLI Tool or Data Analysis Script",
+    "lessons": [
+      {
+        "title": "Shipping a Complete Tool",
+        "type": "assignment",
+        "content": "<p>Combine functions, classes, error handling, and either Pandas or file I/O into one polished, documented tool someone else could actually run.</p>",
+        "objectives": [
+          "Ship a complete, documented Python tool",
+          "Handle real-world messy input gracefully"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "Complete CLI tool or analysis script",
+      "description": "Build a polished, documented tool that solves one real problem end to end."
+    },
+    "assignment": {
+      "title": "Final submission",
+      "instructions": "Submit your GitHub repository URL with clear setup and usage instructions in the README."
+    }
+  }
+],
   },
   {
     courseId: "ai-ml-foundations",
@@ -1516,114 +1756,342 @@ const COURSES: SeedCourse[] = [
     description:
       "Your on-ramp to full-stack development — HTML/CSS/JavaScript fundamentals, a Node/Express backend, and connecting a real frontend to a real API.",
     badge: "Beginner Friendly",
-    totalDays: 18,
+    totalDays: 12,
     rating: 4.4,
     activeStudentCount: 389,
     evaluationCriteria: STANDARD_CRITERIA("full-stack development"),
     modules: [
+  {
+    "day": 1,
+    "title": "HTML & Semantic Structure",
+    "lessons": [
       {
-        day: 1,
-        title: "HTML, CSS & JavaScript Fundamentals",
-        lessons: [
-          {
-            title: "Building a Static Page with Real Interactivity",
-            type: "code",
-            content:
-              "<p>Semantic HTML and flexbox layout form the skeleton; vanilla JavaScript DOM APIs add interactivity without a framework. You'll build a responsive page with at least one real interactive feature.</p>",
-            objectives: ["Build a semantic, responsive page with flexbox", "Add interactivity with vanilla JS DOM APIs"],
-            codeBlocks: [
-              {
-                language: "javascript",
-                code: "document.querySelector('#toggle').addEventListener('click', () => {\n  document.querySelector('#panel').classList.toggle('open');\n});",
-              },
-            ],
-          },
+        "title": "Writing Semantic HTML",
+        "type": "reading",
+        "content": "<p>Semantic tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;article&gt;</code> describe meaning, not just appearance — screen readers and search engines rely on this structure. You'll build a full page layout using only semantic elements, no generic <code>&lt;div&gt;</code> soup.</p>",
+        "objectives": [
+          "Structure a page with semantic HTML5 elements",
+          "Explain why semantic markup matters for accessibility and SEO"
         ],
-        handsOnProject: {
-          title: "Interactive landing page",
-          description: "Build a responsive static page with at least one interactive JS feature.",
-        },
-        assignment: {
-          title: "Semantic markup review",
-          instructions: "Explain your semantic tag choices and responsive layout approach.",
-        },
-      },
-      {
-        day: 2,
-        title: "Building a Backend with Node & Express",
-        lessons: [
-          {
-            title: "Your First REST API",
-            type: "code",
-            content:
-              "<p>Express turns route definitions into a working API in a few lines. You'll set up a server with multiple routes returning structured JSON.</p>",
-            objectives: ["Set up an Express server with multiple routes", "Return structured JSON responses from an API"],
-            codeBlocks: [
-              {
-                language: "javascript",
-                code: "app.get('/api/notes', (req, res) => {\n  res.json(notes);\n});\n\napp.post('/api/notes', (req, res) => {\n  const note = { id: Date.now(), text: req.body.text };\n  notes.push(note);\n  res.status(201).json(note);\n});",
-              },
-            ],
-          },
-        ],
-        handsOnProject: {
-          title: "Notes API",
-          description: "Build a simple REST API for creating and listing notes.",
-        },
-        assignment: {
-          title: "API testing notes",
-          instructions: "Document how you tested each endpoint (e.g., with curl or Postman).",
-        },
-      },
-      {
-        day: 3,
-        title: "Connecting Frontend to Backend",
-        lessons: [
-          {
-            title: "Fetch, Async/Await & Rendering Data",
-            type: "code",
-            content:
-              "<p>The fetch API with async/await connects your static page to your own backend. You'll render fetched data into the DOM and handle the case where the request fails.</p>",
-            objectives: ["Fetch data from your own API asynchronously", "Render fetched data into the DOM with error handling"],
-            codeBlocks: [
-              {
-                language: "javascript",
-                code: "async function loadNotes() {\n  try {\n    const res = await fetch('/api/notes');\n    const notes = await res.json();\n    render(notes);\n  } catch (err) {\n    showError('Could not load notes.');\n  }\n}",
-              },
-            ],
-          },
-        ],
-        handsOnProject: {
-          title: "Connected frontend",
-          description: "Connect your landing page to the Notes API so notes display live.",
-        },
-        assignment: {
-          title: "Error handling review",
-          instructions: "Explain what happens in your UI when the API call fails.",
-        },
-      },
-      {
-        day: 4,
-        title: "Capstone: Full-Stack Notes App",
-        lessons: [
-          {
-            title: "Shipping the Complete App",
-            type: "assignment",
-            content:
-              "<p>Combine your frontend and Notes API into one deployed full-stack application, publicly reachable.</p>",
-            objectives: ["Combine frontend and backend into one working application", "Deploy the app publicly"],
-          },
-        ],
-        handsOnProject: {
-          title: "Deployed notes app",
-          description: "Deploy your full-stack notes app so it's publicly accessible.",
-        },
-        assignment: {
-          title: "Final submission",
-          instructions: "Submit your GitHub repository URL with the deployed link in the README.",
-        },
-      },
+        "codeBlocks": []
+      }
     ],
+    "handsOnProject": {
+      "title": "Semantic homepage skeleton",
+      "description": "Build a homepage layout (header, nav, main, footer) using only semantic tags."
+    },
+    "assignment": {
+      "title": "Accessibility audit",
+      "instructions": "Run your page through a screen reader or accessibility checker and fix any warnings."
+    }
+  },
+  {
+    "day": 2,
+    "title": "CSS Fundamentals & Responsive Layout",
+    "lessons": [
+      {
+        "title": "Flexbox and Grid in Practice",
+        "type": "code",
+        "content": "<p>Flexbox handles one-dimensional layout (a row or column); Grid handles two-dimensional layout (rows and columns together). You'll rebuild yesterday's HTML skeleton into a responsive layout that reflows cleanly from mobile to desktop.</p>",
+        "objectives": [
+          "Lay out a page with Flexbox and CSS Grid",
+          "Use media queries to reflow layout at breakpoints"
+        ],
+        "codeBlocks": [
+          {
+            "language": "css",
+            "code": ".layout {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  gap: 24px;\n}\n@media (max-width: 640px) {\n  .layout { grid-template-columns: 1fr; }\n}",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Responsive layout pass",
+      "description": "Make your Day 1 page fully responsive across mobile, tablet, and desktop widths."
+    },
+    "assignment": {
+      "title": "Breakpoint documentation",
+      "instructions": "List the breakpoints you chose and why, with before/after screenshots."
+    }
+  },
+  {
+    "day": 3,
+    "title": "JavaScript Fundamentals — Variables, Functions, the DOM",
+    "lessons": [
+      {
+        "title": "Manipulating the DOM",
+        "type": "code",
+        "content": "<p>The DOM is a live tree of your HTML that JavaScript can read and mutate. You'll select elements, update text and attributes, and respond to click events — the foundation every frontend framework builds on top of.</p>",
+        "objectives": [
+          "Select and mutate DOM elements with vanilla JS",
+          "Attach and handle click events"
+        ],
+        "codeBlocks": [
+          {
+            "language": "javascript",
+            "code": "const btn = document.querySelector('#toggle');\nbtn.addEventListener('click', () => {\n  document.body.classList.toggle('dark');\n});",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Interactive page toggle",
+      "description": "Add at least three interactive behaviors (toggle, counter, show/hide) to your page using vanilla JS."
+    },
+    "assignment": {
+      "title": "Event handling writeup",
+      "instructions": "Explain event bubbling using one real interaction from your page."
+    }
+  },
+  {
+    "day": 4,
+    "title": "JavaScript — Async, Fetch, and Events",
+    "lessons": [
+      {
+        "title": "Fetching Data from an API",
+        "type": "code",
+        "content": "<p>Real pages load data after the initial render, not before. You'll use <code>fetch</code> and <code>async/await</code> to pull data from a public API and render it into the DOM, handling the loading and error states explicitly.</p>",
+        "objectives": [
+          "Fetch data from a public API with async/await",
+          "Render loading and error states in the UI"
+        ],
+        "codeBlocks": [
+          {
+            "language": "javascript",
+            "code": "async function loadUsers() {\n  const res = await fetch('/api/users');\n  if (!res.ok) throw new Error('Failed to load');\n  return res.json();\n}",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Live data widget",
+      "description": "Build a small widget that fetches and displays real data from a public API."
+    },
+    "assignment": {
+      "title": "Error state design",
+      "instructions": "Show what your widget looks like when the fetch fails — don't leave it blank."
+    }
+  },
+  {
+    "day": 5,
+    "title": "Git & GitHub Collaboration Basics",
+    "lessons": [
+      {
+        "title": "Branching, Committing, and Pull Requests",
+        "type": "reading",
+        "content": "<p>Every professional codebase moves through branches and pull requests, not direct commits to main. You'll practice a full feature-branch workflow: branch, commit in logical chunks, open a PR, and merge.</p>",
+        "objectives": [
+          "Use a feature-branch workflow end to end",
+          "Write commit messages that explain why, not just what"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "First real PR",
+      "description": "Push your work so far to a public GitHub repo using a proper branch and PR."
+    },
+    "assignment": {
+      "title": "Commit history review",
+      "instructions": "Look back at your commit history and rewrite the two worst commit messages."
+    }
+  },
+  {
+    "day": 6,
+    "title": "Intro to React — Components & Props",
+    "lessons": [
+      {
+        "title": "Thinking in Components",
+        "type": "code",
+        "content": "<p>React breaks a UI into small, reusable components that take data in via props and render output. You'll port your static HTML page into a small tree of React components.</p>",
+        "objectives": [
+          "Break a UI into reusable components",
+          "Pass and type data through props"
+        ],
+        "codeBlocks": [
+          {
+            "language": "tsx",
+            "code": "function Card({ title, children }: { title: string; children: React.ReactNode }) {\n  return (\n    <div className=\"card\">\n      <h3>{title}</h3>\n      {children}\n    </div>\n  );\n}",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Componentized page",
+      "description": "Rebuild your Day 1-2 page as a tree of at least five React components."
+    },
+    "assignment": {
+      "title": "Component boundaries writeup",
+      "instructions": "Explain why you split components where you did."
+    }
+  },
+  {
+    "day": 7,
+    "title": "React State & Hooks",
+    "lessons": [
+      {
+        "title": "useState and useEffect",
+        "type": "code",
+        "content": "<p><code>useState</code> gives a component memory across renders; <code>useEffect</code> runs side effects like data fetching in response to that memory changing. You'll add real interactivity — a form, a filtered list — backed by state.</p>",
+        "objectives": [
+          "Manage local state with useState",
+          "Run and clean up side effects with useEffect"
+        ],
+        "codeBlocks": [
+          {
+            "language": "tsx",
+            "code": "const [query, setQuery] = useState('');\nconst filtered = items.filter(i => i.name.includes(query));",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Filterable list",
+      "description": "Build a searchable/filterable list component backed by React state."
+    },
+    "assignment": {
+      "title": "State design notes",
+      "instructions": "Document what state you chose to keep in React vs. derive on render."
+    }
+  },
+  {
+    "day": 8,
+    "title": "Building a Node.js + Express API",
+    "lessons": [
+      {
+        "title": "Your First REST API",
+        "type": "code",
+        "content": "<p>Express turns a handful of route handlers into a real HTTP API. You'll build endpoints for creating and listing a resource, with request validation and proper status codes.</p>",
+        "objectives": [
+          "Build REST endpoints with Express",
+          "Return correct HTTP status codes for success and validation errors"
+        ],
+        "codeBlocks": [
+          {
+            "language": "javascript",
+            "code": "app.post('/api/items', (req, res) => {\n  if (!req.body.name) return res.status(400).json({ error: 'name required' });\n  const item = store.create(req.body);\n  res.status(201).json(item);\n});",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Items API",
+      "description": "Build a small REST API with create, list, and delete endpoints for one resource."
+    },
+    "assignment": {
+      "title": "API contract doc",
+      "instructions": "Write a short doc listing each endpoint, its inputs, and its response shape."
+    }
+  },
+  {
+    "day": 9,
+    "title": "MongoDB Basics — CRUD with Mongoose",
+    "lessons": [
+      {
+        "title": "Modeling Data with Mongoose",
+        "type": "code",
+        "content": "<p>Mongoose schemas give MongoDB's flexible documents some real structure. You'll replace yesterday's in-memory store with a real MongoDB collection using a Mongoose schema and model.</p>",
+        "objectives": [
+          "Define a Mongoose schema and model",
+          "Perform create/read/update/delete against MongoDB"
+        ],
+        "codeBlocks": [
+          {
+            "language": "javascript",
+            "code": "const ItemSchema = new mongoose.Schema({ name: String, done: { type: Boolean, default: false } });\nconst Item = mongoose.model('Item', ItemSchema);",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "handsOnProject": {
+      "title": "Persisted API",
+      "description": "Swap your Day 8 API's storage to real MongoDB via Mongoose."
+    },
+    "assignment": {
+      "title": "Schema design notes",
+      "instructions": "Explain your schema's field choices and any indexes you added."
+    }
+  },
+  {
+    "day": 10,
+    "title": "Connecting Frontend to Backend",
+    "lessons": [
+      {
+        "title": "Wiring React to Your Own API",
+        "type": "code",
+        "content": "<p>This is where the two halves meet: your React components now fetch from and post to the Express API you built, not a placeholder. You'll handle loading states, optimistic updates, and error handling for real network calls.</p>",
+        "objectives": [
+          "Connect a React frontend to a self-built API",
+          "Handle loading, error, and optimistic UI states"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "End-to-end feature",
+      "description": "Wire one full feature (e.g., add/complete/delete an item) from React UI through to MongoDB."
+    },
+    "assignment": {
+      "title": "Data flow diagram",
+      "instructions": "Diagram the request path from a button click to the database and back."
+    }
+  },
+  {
+    "day": 11,
+    "title": "Authentication Basics",
+    "lessons": [
+      {
+        "title": "Sessions, Tokens, and Protected Routes",
+        "type": "code",
+        "content": "<p>Authentication answers \"who is this,\" authorization answers \"what can they do.\" You'll add a simple login flow and protect at least one API route so it only responds to authenticated requests.</p>",
+        "objectives": [
+          "Implement a basic login flow",
+          "Protect an API route behind authentication"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "Protected feature",
+      "description": "Require login before a user can create or delete items in your app."
+    },
+    "assignment": {
+      "title": "Auth flow writeup",
+      "instructions": "Document what happens, step by step, from login click to an authenticated API call."
+    }
+  },
+  {
+    "day": 12,
+    "title": "Capstone: Full-Stack Deployment",
+    "lessons": [
+      {
+        "title": "Shipping the Whole Stack",
+        "type": "assignment",
+        "content": "<p>Bring frontend, API, database, and auth together into one deployed application, publicly reachable — the complete arc of everything built this track.</p>",
+        "objectives": [
+          "Integrate frontend, backend, database, and auth into one app",
+          "Deploy the full stack publicly"
+        ],
+        "codeBlocks": []
+      }
+    ],
+    "handsOnProject": {
+      "title": "Deployed full-stack app",
+      "description": "Deploy your complete application so it's live and publicly usable."
+    },
+    "assignment": {
+      "title": "Final submission",
+      "instructions": "Submit your GitHub repository URL with the live deployed link in the README."
+    }
+  }
+],
   },
   {
     courseId: "devops-engineering-fundamentals",
@@ -1732,6 +2200,460 @@ const COURSES: SeedCourse[] = [
       },
     ],
   },
+  {
+    "courseId": "dsa-interview-prep",
+    "title": "Foundations · Data Structures & Algorithms: Interview-Ready DSA",
+    "description": "The single most requested track for placement and internship prep — arrays through dynamic programming, building toward a timed mock-interview problem set.",
+    "bannerUrl": "/course-banners/dsa-interview-prep.svg",
+    "price": 1999,
+    "badge": "Most Requested",
+    "domainTags": [
+      "dsa-interview-prep"
+    ],
+    "skillLevel": "beginner",
+    "totalDays": 15,
+    "rating": 4.2,
+    "activeStudentCount": 512,
+    "evaluationCriteria": [
+      {
+        "criterion": "Code Structure",
+        "weight": 30,
+        "description": "Solutions are organized, readable, and follow conventions expected in professional software work."
+      },
+      {
+        "criterion": "Architecture & Documentation",
+        "weight": 30,
+        "description": "README and complexity notes clearly explain the approach and Big-O reasoning."
+      },
+      {
+        "criterion": "Live Proof & Functionality",
+        "weight": 40,
+        "description": "The submitted link is live, publicly reachable, and demonstrates working, tested solutions."
+      }
+    ],
+    "modules": [
+      {
+        "day": 1,
+        "title": "Big-O Notation & Complexity Analysis",
+        "lessons": [
+          {
+            "title": "Measuring Algorithm Efficiency",
+            "type": "reading",
+            "content": "<p>Big-O describes how an algorithm's time or space grows as input size grows — the language every technical interview is conducted in. You'll analyze the complexity of several small functions by hand.</p>",
+            "objectives": [
+              "Determine the time complexity of a given function",
+              "Distinguish best, average, and worst case"
+            ],
+            "codeBlocks": []
+          }
+        ],
+        "handsOnProject": {
+          "title": "Complexity audit",
+          "description": "Analyze the Big-O of five functions you've written in past projects."
+        },
+        "assignment": {
+          "title": "Complexity writeup",
+          "instructions": "Explain, in plain language, why an O(n²) solution can fail at scale where O(n log n) doesn't."
+        }
+      },
+      {
+        "day": 2,
+        "title": "Arrays & Two-Pointer Techniques",
+        "lessons": [
+          {
+            "title": "Two Pointers and Sliding Window",
+            "type": "code",
+            "content": "<p>Many array problems that look O(n²) at first collapse to O(n) with two pointers moving toward or alongside each other. You'll solve classic problems like pair-sum and longest-substring using this pattern.</p>",
+            "objectives": [
+              "Apply the two-pointer technique to array problems",
+              "Recognize when a sliding window applies"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def two_sum_sorted(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo < hi:\n        s = arr[lo] + arr[hi]\n        if s == target: return (lo, hi)\n        if s < target: lo += 1\n        else: hi -= 1\n    return None",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Two-pointer problem set",
+          "description": "Solve five array problems using two-pointer or sliding-window techniques."
+        },
+        "assignment": {
+          "title": "Pattern recognition notes",
+          "instructions": "For each problem, explain the signal that told you two pointers would work."
+        }
+      },
+      {
+        "day": 3,
+        "title": "Strings & Pattern Matching",
+        "lessons": [
+          {
+            "title": "String Algorithms in Practice",
+            "type": "code",
+            "content": "<p>String problems reward the same two-pointer and hashing patterns as arrays, plus a few of their own — anagram detection, substring search. You'll implement and compare a few approaches.</p>",
+            "objectives": [
+              "Solve anagram and substring problems efficiently",
+              "Compare brute-force vs. optimized string matching"
+            ],
+            "codeBlocks": []
+          }
+        ],
+        "handsOnProject": {
+          "title": "String problem set",
+          "description": "Solve five common string interview problems with justified time complexity."
+        },
+        "assignment": {
+          "title": "Approach comparison",
+          "instructions": "Pick one problem and compare a brute-force solution against your optimized one."
+        }
+      },
+      {
+        "day": 4,
+        "title": "Linked Lists",
+        "lessons": [
+          {
+            "title": "Singly and Doubly Linked Lists",
+            "type": "code",
+            "content": "<p>Linked lists trade array's O(1) access for O(1) insertion/removal at known positions. You'll implement a singly linked list from scratch, then solve reversal and cycle-detection problems on it.</p>",
+            "objectives": [
+              "Implement a linked list from scratch",
+              "Detect a cycle using Floyd's algorithm"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "class Node:\n    def __init__(self, val, next=None):\n        self.val = val\n        self.next = next\n\ndef has_cycle(head):\n    slow = fast = head\n    while fast and fast.next:\n        slow, fast = slow.next, fast.next.next\n        if slow is fast: return True\n    return False",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Linked list from scratch",
+          "description": "Implement a singly linked list with insert, delete, reverse, and cycle detection."
+        },
+        "assignment": {
+          "title": "Complexity table",
+          "instructions": "Table out the time complexity of each operation you implemented."
+        }
+      },
+      {
+        "day": 5,
+        "title": "Stacks & Queues",
+        "lessons": [
+          {
+            "title": "LIFO and FIFO in Practice",
+            "type": "code",
+            "content": "<p>Stacks and queues aren't just abstract — they're the backbone of undo/redo, balanced-parenthesis checking, and BFS. You'll implement both and use a stack to validate matched brackets.</p>",
+            "objectives": [
+              "Implement a stack and queue from scratch",
+              "Use a stack to solve a balanced-parentheses problem"
+            ],
+            "codeBlocks": []
+          }
+        ],
+        "handsOnProject": {
+          "title": "Bracket validator",
+          "description": "Build a function that validates balanced brackets in an expression using a stack."
+        },
+        "assignment": {
+          "title": "Real-world mapping",
+          "instructions": "Name two real systems that rely on a stack or queue and explain how."
+        }
+      },
+      {
+        "day": 6,
+        "title": "Recursion Fundamentals",
+        "lessons": [
+          {
+            "title": "Thinking Recursively",
+            "type": "code",
+            "content": "<p>Recursion is a function calling itself on a smaller version of the same problem, with a base case to stop. You'll practice writing and tracing recursive solutions until the call stack stops feeling mysterious.</p>",
+            "objectives": [
+              "Write a correct recursive function with a clear base case",
+              "Trace a recursive call stack by hand"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def fib(n, memo={}):\n    if n <= 1: return n\n    if n not in memo:\n        memo[n] = fib(n-1, memo) + fib(n-2, memo)\n    return memo[n]",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Recursive problem set",
+          "description": "Solve five problems recursively, including one that requires memoization."
+        },
+        "assignment": {
+          "title": "Stack trace writeup",
+          "instructions": "Trace the call stack of one solution by hand and show the diagram."
+        }
+      },
+      {
+        "day": 7,
+        "title": "Sorting Algorithms",
+        "lessons": [
+          {
+            "title": "Merge Sort and Quick Sort",
+            "type": "code",
+            "content": "<p>Merge sort and quick sort are the two sorting algorithms every interview expects you to implement from memory, not just call. You'll implement both and compare their behavior on already-sorted input.</p>",
+            "objectives": [
+              "Implement merge sort and quick sort from scratch",
+              "Explain quicksort's worst-case degradation"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def merge_sort(arr):\n    if len(arr) <= 1: return arr\n    mid = len(arr) // 2\n    left, right = merge_sort(arr[:mid]), merge_sort(arr[mid:])\n    result = []\n    while left and right:\n        result.append(left.pop(0) if left[0] <= right[0] else right.pop(0))\n    return result + left + right",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Sorting implementation",
+          "description": "Implement merge sort and quick sort, and benchmark both against Python's built-in sort."
+        },
+        "assignment": {
+          "title": "Worst-case analysis",
+          "instructions": "Explain a specific input that makes naive quicksort degrade to O(n²)."
+        }
+      },
+      {
+        "day": 8,
+        "title": "Searching & Binary Search",
+        "lessons": [
+          {
+            "title": "Binary Search and Its Variants",
+            "type": "code",
+            "content": "<p>Binary search is simple to state and notoriously easy to get subtly wrong at the boundaries. You'll implement it, then solve variants like \"find first occurrence\" and \"search in rotated array.\"</p>",
+            "objectives": [
+              "Implement binary search without off-by-one bugs",
+              "Adapt binary search to rotated and boundary-search problems"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target: return mid\n        if arr[mid] < target: lo = mid + 1\n        else: hi = mid - 1\n    return -1",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Binary search variants",
+          "description": "Solve four binary-search-family problems, including a rotated-array search."
+        },
+        "assignment": {
+          "title": "Boundary bug writeup",
+          "instructions": "Describe an off-by-one bug you hit and how you fixed it."
+        }
+      },
+      {
+        "day": 9,
+        "title": "Hash Tables & Hash Maps",
+        "lessons": [
+          {
+            "title": "O(1) Lookup with Hashing",
+            "type": "code",
+            "content": "<p>Hash maps trade memory for near-constant-time lookup, turning many O(n²) brute-force solutions into O(n). You'll re-solve an earlier array problem using a hash map and compare the complexity.</p>",
+            "objectives": [
+              "Use a hash map to reduce time complexity",
+              "Explain how hash collisions are handled"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def two_sum(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen: return (seen[target - n], i)\n        seen[n] = i",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Hash map refactor",
+          "description": "Refactor two earlier brute-force solutions to use hash maps, and show the complexity improvement."
+        },
+        "assignment": {
+          "title": "Collision writeup",
+          "instructions": "Explain what a hash collision is and one strategy to handle it."
+        }
+      },
+      {
+        "day": 10,
+        "title": "Trees — Binary Trees & BST",
+        "lessons": [
+          {
+            "title": "Binary Search Trees",
+            "type": "code",
+            "content": "<p>A binary search tree keeps every left subtree smaller and every right subtree larger, giving O(log n) search on balanced trees. You'll implement insert, search, and delete on a BST.</p>",
+            "objectives": [
+              "Implement insert and search on a binary search tree",
+              "Explain when a BST degrades to O(n)"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "class TreeNode:\n    def __init__(self, val):\n        self.val = val\n        self.left = self.right = None\n\ndef insert(root, val):\n    if not root: return TreeNode(val)\n    if val < root.val: root.left = insert(root.left, val)\n    else: root.right = insert(root.right, val)\n    return root",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "BST from scratch",
+          "description": "Implement a binary search tree with insert, search, and delete."
+        },
+        "assignment": {
+          "title": "Degradation writeup",
+          "instructions": "Describe an insertion order that turns your BST into a straight line, and why."
+        }
+      },
+      {
+        "day": 11,
+        "title": "Tree Traversals — BFS & DFS",
+        "lessons": [
+          {
+            "title": "Breadth-First and Depth-First Traversal",
+            "type": "code",
+            "content": "<p>BFS explores level by level using a queue; DFS explores depth-first using recursion or a stack. You'll implement both on a tree and use BFS to find shortest path in a small graph.</p>",
+            "objectives": [
+              "Implement BFS and DFS traversals",
+              "Choose the right traversal for a given problem"
+            ],
+            "codeBlocks": []
+          }
+        ],
+        "handsOnProject": {
+          "title": "Traversal problem set",
+          "description": "Solve four tree problems, at least two requiring BFS and two requiring DFS."
+        },
+        "assignment": {
+          "title": "Traversal choice writeup",
+          "instructions": "For one problem, explain why BFS was necessary and DFS wouldn't work."
+        }
+      },
+      {
+        "day": 12,
+        "title": "Heaps & Priority Queues",
+        "lessons": [
+          {
+            "title": "Min-Heaps and Top-K Problems",
+            "type": "code",
+            "content": "<p>A heap keeps the smallest (or largest) element accessible in O(1), with O(log n) insert/remove — exactly what \"top K\" and scheduling problems need. You'll use a heap to solve a top-K problem efficiently.</p>",
+            "objectives": [
+              "Use a heap to solve top-K style problems",
+              "Explain heap insert/extract complexity"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "import heapq\ndef top_k(nums, k):\n    return heapq.nlargest(k, nums)",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Top-K implementation",
+          "description": "Solve a top-K problem using a heap, and compare against a full-sort approach."
+        },
+        "assignment": {
+          "title": "Complexity comparison",
+          "instructions": "Compare your heap solution's complexity against sorting the whole array."
+        }
+      },
+      {
+        "day": 13,
+        "title": "Graphs — Representation & Traversal",
+        "lessons": [
+          {
+            "title": "Adjacency Lists and Graph Search",
+            "type": "code",
+            "content": "<p>Most real systems (social networks, road maps, dependency graphs) are graphs, not trees. You'll represent a graph as an adjacency list and implement BFS/DFS to find connectivity and shortest unweighted paths.</p>",
+            "objectives": [
+              "Represent a graph with an adjacency list",
+              "Find shortest unweighted path with BFS"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "from collections import deque\ndef bfs(graph, start):\n    visited, q = {start}, deque([start])\n    while q:\n        node = q.popleft()\n        for neighbor in graph[node]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                q.append(neighbor)\n    return visited",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "Graph traversal problem set",
+          "description": "Solve three graph problems covering connectivity and shortest unweighted path."
+        },
+        "assignment": {
+          "title": "Representation writeup",
+          "instructions": "Explain when you'd choose an adjacency list over an adjacency matrix."
+        }
+      },
+      {
+        "day": 14,
+        "title": "Dynamic Programming Fundamentals",
+        "lessons": [
+          {
+            "title": "Memoization and Tabulation",
+            "type": "code",
+            "content": "<p>Dynamic programming solves problems by caching answers to overlapping subproblems — the same idea as memoized recursion, made explicit. You'll solve a classic DP problem both top-down and bottom-up.</p>",
+            "objectives": [
+              "Identify overlapping subproblems in a problem",
+              "Solve a problem with both memoization and tabulation"
+            ],
+            "codeBlocks": [
+              {
+                "language": "python",
+                "code": "def coin_change(coins, amount):\n    dp = [0] + [float('inf')] * amount\n    for a in range(1, amount + 1):\n        for c in coins:\n            if c <= a:\n                dp[a] = min(dp[a], dp[a - c] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1",
+                "caption": ""
+              }
+            ]
+          }
+        ],
+        "handsOnProject": {
+          "title": "DP problem set",
+          "description": "Solve three DP problems, each implemented both top-down and bottom-up."
+        },
+        "assignment": {
+          "title": "Subproblem writeup",
+          "instructions": "For one problem, diagram the overlapping subproblems your solution avoids recomputing."
+        }
+      },
+      {
+        "day": 15,
+        "title": "Capstone: Mock Interview Problem Set",
+        "lessons": [
+          {
+            "title": "Timed Mock Interview",
+            "type": "assignment",
+            "content": "<p>Combine everything from this track into a timed set of problems spanning arrays, trees, graphs, and DP — the same format as a real technical interview round.</p>",
+            "objectives": [
+              "Solve mixed-topic problems under time pressure",
+              "Explain your approach out loud/in writing before coding"
+            ],
+            "codeBlocks": []
+          }
+        ],
+        "handsOnProject": {
+          "title": "Timed problem set",
+          "description": "Solve five mixed-topic problems in 90 minutes, documenting your approach before each solution."
+        },
+        "assignment": {
+          "title": "Final submission",
+          "instructions": "Submit a GitHub repository with all solutions, complexity notes, and your mock-interview reflection."
+        }
+      }
+    ]
+  }
 ];
 
 export async function seedCourses() {

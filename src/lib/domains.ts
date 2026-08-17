@@ -18,6 +18,7 @@ export const SPECIALIZATIONS: Option[] = [
   { value: "distributed-systems", label: "Distributed Systems" },
   { value: "web3", label: "Web3 & Blockchain" },
   { value: "embedded-edge-ai", label: "Embedded & Edge AI" },
+  { value: "dsa-interview-prep", label: "Data Structures & Algorithms" },
 ];
 
 export const FIELD_OF_STUDY_OPTIONS: Option[] = [
