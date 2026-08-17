@@ -34,6 +34,13 @@ export interface MongoUser {
   timezone: string;
   bio: string;
   publicDisplayName: string;
+  fieldOfStudy: string;
+  yearStage: string;
+  specializations: string[];
+  skillLevel: string;
+  primaryGoal: string;
+  onboardingCompleted: boolean;
+  onboardingSkipped: boolean;
   createdAt: number;
 }
 

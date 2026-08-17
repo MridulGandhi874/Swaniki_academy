@@ -36,8 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-# local tooling config (Claude Code harness)
+# local tooling config
 .claude
+.idea
 
 # typescript
 *.tsbuildinfo

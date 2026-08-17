@@ -9,6 +9,7 @@ import LessonReader from "@/components/learn/LessonReader";
 import CompletionBar from "@/components/learn/CompletionBar";
 import EmptyState from "@/components/ui/EmptyState";
 import Skeleton from "@/components/ui/Skeleton";
+import SubmissionPanel, { type SubmissionData } from "@/components/dashboard/SubmissionPanel";
 
 export default function LearnPage() {
   const { courseId, dayId } = useParams<{ courseId: string; dayId: string }>();
@@ -17,6 +18,7 @@ export default function LearnPage() {
 
   const [course, setCourse] = useState<Course | null>(null);
   const [completedDays, setCompletedDays] = useState<number[]>([]);
+  const [submission, setSubmission] = useState<SubmissionData | null>(null);
   const [loading, setLoading] = useState(true);
   const [marking, setMarking] = useState(false);
   const [notFound, setNotFound] = useState(false);
@@ -27,9 +29,12 @@ export default function LearnPage() {
 
     const idToken = await firebaseUser.getIdToken();
 
-    const [courseRes, progressRes] = await Promise.all([
+    const [courseRes, progressRes, submissionRes] = await Promise.all([
       fetch(`/api/courses?courseId=${courseId}`),
       fetch("/api/progress/update", { headers: { Authorization: `Bearer ${idToken}` } }),
+      fetch(`/api/submissions/evaluate?courseId=${courseId}`, {
+        headers: { Authorization: `Bearer ${idToken}` },
+      }),
     ]);
 
     if (courseRes.ok) {
@@ -37,6 +42,11 @@ export default function LearnPage() {
       const found = data.courses?.[0] ?? null;
       setCourse(found);
       if (!found) setNotFound(true);
+    }
+
+    if (submissionRes.ok) {
+      const data = await submissionRes.json();
+      setSubmission(data.submissions?.[0] ?? null);
     }
 
     let hasProgress = false;
@@ -138,6 +148,7 @@ export default function LearnPage() {
   const sortedModules = [...course.modules].sort((a, b) => a.day - b.day);
   const nextModule = sortedModules.find((m) => m.day > dayNum);
   const isCurrentCompleted = completedDays.includes(dayNum);
+  const isLastDay = sortedModules.length > 0 && sortedModules[sortedModules.length - 1].day === dayNum;
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">
@@ -163,6 +174,21 @@ export default function LearnPage() {
                 marking={marking}
                 nextHref={nextModule ? `/learn/${courseId}/${nextModule.day}` : null}
               />
+
+              {isLastDay && (
+                <div className="mt-8 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h2 className="text-base font-bold text-gray-900">Submit Your Project</h2>
+                  <p className="mt-1 text-sm text-gray-500">
+                    This is the final day — submit your capstone project link for automated
+                    evaluation. A score of 75 or higher unlocks your certificate.
+                  </p>
+                  <SubmissionPanel
+                    courseId={courseId}
+                    submission={submission}
+                    onUpdated={(next) => setSubmission(next)}
+                  />
+                </div>
+              )}
             </>
           ) : (
             <EmptyState title="Module not found" description="This day doesn't exist in this course." />

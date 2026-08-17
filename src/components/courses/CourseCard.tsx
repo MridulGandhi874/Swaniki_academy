@@ -1,12 +1,11 @@
 import StarRating from "@/components/ui/StarRating";
-import Avatar from "@/components/ui/Avatar";
+import Logo from "@/components/Logo";
 import Button from "@/components/ui/Button";
 
 export interface CourseCardData {
   courseId: string;
   title: string;
   bannerUrl?: string;
-  authorName?: string;
   badge?: string;
   price?: number;
   rating?: number;
@@ -69,9 +68,8 @@ export default function CourseCard({
           {course.activeStudentCount ?? 0} active students · {course.totalLessons ?? 0} modules
         </p>
 
-        <div className="mt-4 flex items-center gap-2">
-          <Avatar name={course.authorName || "Instructor"} size={28} />
-          <span className="text-sm text-gray-600">{course.authorName || "Academy Instructor"}</span>
+        <div className="mt-4">
+          <Logo size={22} textClassName="text-gray-600" />
         </div>
 
         <div className="mt-5">

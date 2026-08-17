@@ -20,6 +20,15 @@ const UserSchema = new Schema({
   bio: { type: String, default: "" },
   publicDisplayName: { type: String, default: "" },
 
+  // Induction Wizard — captured on first login, editable later from My Profile
+  fieldOfStudy: { type: String, default: "" },
+  yearStage: { type: String, default: "" },
+  specializations: { type: [String], default: [] },
+  skillLevel: { type: String, default: "" },
+  primaryGoal: { type: String, default: "" },
+  onboardingCompleted: { type: Boolean, default: false },
+  onboardingSkipped: { type: Boolean, default: false },
+
   createdAt: { type: Number, default: () => Date.now() },
 });
 

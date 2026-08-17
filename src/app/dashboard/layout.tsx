@@ -12,12 +12,20 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!loading && !firebaseUser) {
+    if (loading) return;
+    if (!firebaseUser) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+      return;
     }
-  }, [loading, firebaseUser, pathname, router]);
+    if (mongoUser && !mongoUser.onboardingCompleted && !mongoUser.onboardingSkipped) {
+      router.replace("/welcome");
+    }
+  }, [loading, firebaseUser, mongoUser, pathname, router]);
 
-  if (loading || !firebaseUser || !mongoUser) {
+  const needsOnboarding =
+    mongoUser && !mongoUser.onboardingCompleted && !mongoUser.onboardingSkipped;
+
+  if (loading || !firebaseUser || !mongoUser || needsOnboarding) {
     return (
       <div className="min-h-screen bg-[var(--color-soft-canvas)] px-6 py-10">
         <div className="mx-auto max-w-7xl">

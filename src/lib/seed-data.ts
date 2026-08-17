@@ -21,10 +21,11 @@ interface SeedCourse {
   courseId: string;
   title: string;
   description: string;
-  authorName: string;
   bannerUrl: string;
   price: number;
   badge: string;
+  domainTags: string[];
+  skillLevel: "beginner" | "intermediate" | "advanced";
   totalDays: number;
   rating: number;
   activeStudentCount: number;
@@ -55,13 +56,14 @@ const COURSES: SeedCourse[] = [
     courseId: "full-stack-web-development",
     bannerUrl: "/course-banners/full-stack-web-development.svg",
     price: 2999,
-    title: "Full-Stack Web Development Track",
+    domainTags: ["full-stack"],
+    skillLevel: "intermediate",
+    title: "Professional · Full-Stack Development: The Next.js & Node Track",
     description:
       "Build production-grade web applications end to end with Next.js, Node.js, and MongoDB — from server components and API routes to authentication and database design.",
-    authorName: "Ravi Chandran",
     badge: "Most Popular",
     totalDays: 24,
-    rating: 4.9,
+    rating: 3.9,
     activeStudentCount: 842,
     evaluationCriteria: STANDARD_CRITERIA("full-stack web development"),
     modules: [
@@ -171,13 +173,14 @@ const COURSES: SeedCourse[] = [
     courseId: "applied-ai-ml-systems",
     bannerUrl: "/course-banners/applied-ai-ml-systems.svg",
     price: 3999,
-    title: "Applied AI & Machine Learning Systems",
+    domainTags: ["ai-ml"],
+    skillLevel: "advanced",
+    title: "Advanced · AI & Machine Learning: Production ML Systems",
     description:
       "Go from PyTorch fundamentals to production ML systems — train computer vision models, build LLM inference pipelines, and ship a model behind a real API.",
-    authorName: "Dr. Meera Iyer",
     badge: "High Demand",
     totalDays: 28,
-    rating: 4.9,
+    rating: 4.0,
     activeStudentCount: 731,
     evaluationCriteria: STANDARD_CRITERIA("applied machine learning"),
     modules: [
@@ -277,13 +280,14 @@ const COURSES: SeedCourse[] = [
     courseId: "devops-cloud-native",
     bannerUrl: "/course-banners/devops-cloud-native.svg",
     price: 3499,
-    title: "DevOps & Cloud Native Architecture",
+    domainTags: ["devops-cloud"],
+    skillLevel: "intermediate",
+    title: "Professional · DevOps & Cloud: Cloud-Native Architecture",
     description:
       "Containerize, orchestrate, and automate deployment of real applications using Docker, Kubernetes, and AWS CI/CD pipelines — the same stack production platform teams run.",
-    authorName: "James Okafor",
     badge: "Industry Track",
     totalDays: 21,
-    rating: 4.8,
+    rating: 4.0,
     activeStudentCount: 654,
     evaluationCriteria: STANDARD_CRITERIA("cloud infrastructure"),
     modules: [
@@ -383,13 +387,14 @@ const COURSES: SeedCourse[] = [
     courseId: "cybersecurity-offensive-systems",
     bannerUrl: "/course-banners/cybersecurity-offensive-systems.svg",
     price: 4499,
-    title: "Cyber Security & Offensive Systems",
+    domainTags: ["cybersecurity"],
+    skillLevel: "advanced",
+    title: "Advanced · Cybersecurity: Offensive Security & Pentesting",
     description:
       "Learn offensive security the way real red teams operate — network protocol analysis, web application penetration testing, and exploit development, all in authorized lab environments.",
-    authorName: "Priya Deshmukh",
     badge: "Advanced",
     totalDays: 26,
-    rating: 4.9,
+    rating: 4.4,
     activeStudentCount: 512,
     evaluationCriteria: [
       {
@@ -499,13 +504,14 @@ const COURSES: SeedCourse[] = [
     courseId: "backend-microservices-engineering",
     bannerUrl: "/course-banners/backend-microservices-engineering.svg",
     price: 2999,
-    title: "Backend Microservices Engineering",
+    domainTags: ["distributed-systems","full-stack"],
+    skillLevel: "advanced",
+    title: "Advanced · Distributed Systems: Backend Microservices Engineering",
     description:
       "Design and build distributed backend systems in Go — service boundaries, gRPC communication, and distributed caching — the way high-scale platform teams architect backends.",
-    authorName: "Daniel Kim",
     badge: "Systems Track",
     totalDays: 22,
-    rating: 4.8,
+    rating: 4.0,
     activeStudentCount: 468,
     evaluationCriteria: STANDARD_CRITERIA("distributed backend systems"),
     modules: [
@@ -605,13 +611,14 @@ const COURSES: SeedCourse[] = [
     courseId: "mobile-app-development",
     bannerUrl: "/course-banners/mobile-app-development.svg",
     price: 2499,
-    title: "Mobile Application Development",
+    domainTags: ["mobile"],
+    skillLevel: "intermediate",
+    title: "Professional · Mobile Development: Cross-Platform Apps with Flutter",
     description:
       "Build cross-platform mobile applications with Flutter and Firebase — from widget composition and state management to shipping a real app to both iOS and Android.",
-    authorName: "Aisha Rahman",
     badge: "Cross-Platform",
     totalDays: 20,
-    rating: 4.8,
+    rating: 3.3,
     activeStudentCount: 597,
     evaluationCriteria: STANDARD_CRITERIA("mobile application development"),
     modules: [
@@ -711,13 +718,14 @@ const COURSES: SeedCourse[] = [
     courseId: "data-engineering-analytics",
     bannerUrl: "/course-banners/data-engineering-analytics.svg",
     price: 3499,
-    title: "Data Engineering & Analytics Pipelines",
+    domainTags: ["data-engineering"],
+    skillLevel: "advanced",
+    title: "Advanced · Data Engineering: Analytics Pipelines at Scale",
     description:
       "Build the pipelines that power analytics at scale — distributed processing with Apache Spark, event streaming with Kafka, and warehousing with Snowflake.",
-    authorName: "Wei Zhang",
     badge: "High Demand",
     totalDays: 24,
-    rating: 4.8,
+    rating: 3.1,
     activeStudentCount: 439,
     evaluationCriteria: STANDARD_CRITERIA("data engineering"),
     modules: [
@@ -817,13 +825,14 @@ const COURSES: SeedCourse[] = [
     courseId: "distributed-systems-design",
     bannerUrl: "/course-banners/distributed-systems-design.svg",
     price: 3999,
-    title: "Distributed System Design & Performance",
+    domainTags: ["distributed-systems"],
+    skillLevel: "advanced",
+    title: "Advanced · Distributed Systems: Design & Performance",
     description:
       "Learn how large-scale systems actually stay fast and available — load balancing, consistent hashing, read/write scaling, and consensus under failure.",
-    authorName: "Carlos Mendes",
     badge: "Advanced",
     totalDays: 25,
-    rating: 4.9,
+    rating: 3.4,
     activeStudentCount: 388,
     evaluationCriteria: STANDARD_CRITERIA("distributed systems design"),
     modules: [
@@ -917,13 +926,14 @@ const COURSES: SeedCourse[] = [
     courseId: "web3-blockchain-systems",
     bannerUrl: "/course-banners/web3-blockchain-systems.svg",
     price: 3499,
-    title: "Web3 & Blockchain Systems",
+    domainTags: ["web3"],
+    skillLevel: "intermediate",
+    title: "Professional · Web3 & Blockchain: Smart Contract Systems",
     description:
       "Write, secure, and ship smart contracts — Solidity fundamentals, contract auditing practices, and building real dApps with Ethers.js.",
-    authorName: "Elena Petrova",
     badge: "Emerging Tech",
     totalDays: 20,
-    rating: 4.7,
+    rating: 3.2,
     activeStudentCount: 301,
     evaluationCriteria: [
       {
@@ -1039,13 +1049,14 @@ const COURSES: SeedCourse[] = [
     courseId: "embedded-systems-edge-ai",
     bannerUrl: "/course-banners/embedded-systems-edge-ai.svg",
     price: 3999,
-    title: "Embedded Systems & Edge AI",
+    domainTags: ["embedded-edge-ai"],
+    skillLevel: "advanced",
+    title: "Advanced · Embedded & Edge AI: Real-Time Systems",
     description:
       "Program real hardware constraints — C++ for embedded targets, real-time operating systems, and running computer vision models on resource-constrained edge devices.",
-    authorName: "Tom Bradley",
     badge: "Hardware Track",
     totalDays: 22,
-    rating: 4.7,
+    rating: 3.4,
     activeStudentCount: 274,
     evaluationCriteria: STANDARD_CRITERIA("embedded systems"),
     modules: [
@@ -1145,13 +1156,14 @@ const COURSES: SeedCourse[] = [
     courseId: "java-programming-fundamentals",
     bannerUrl: "/course-banners/java-programming-fundamentals.svg",
     price: 1499,
-    title: "Java Programming Fundamentals",
+    domainTags: ["full-stack"],
+    skillLevel: "beginner",
+    title: "Foundations · Java Programming: Core Language & OOP",
     description:
       "Learn Java from the ground up — syntax, object-oriented design, collections, and exception handling — building toward a real console application you can point to as proof of skill.",
-    authorName: "Sanjay Mehta",
     badge: "Beginner Friendly",
     totalDays: 18,
-    rating: 4.7,
+    rating: 4.0,
     activeStudentCount: 356,
     evaluationCriteria: STANDARD_CRITERIA("Java programming"),
     modules: [
@@ -1263,13 +1275,14 @@ const COURSES: SeedCourse[] = [
     courseId: "python-programming-fundamentals",
     bannerUrl: "/course-banners/python-programming-fundamentals.svg",
     price: 1499,
-    title: "Python Programming Fundamentals",
+    domainTags: ["ai-ml","data-engineering"],
+    skillLevel: "beginner",
+    title: "Foundations · Python Programming: Core Language & Scripting",
     description:
       "Master Python fundamentals — syntax, data structures, functions, and working with real-world data — culminating in a data-driven command-line tool.",
-    authorName: "Neha Kapoor",
     badge: "Beginner Friendly",
     totalDays: 16,
-    rating: 4.8,
+    rating: 3.5,
     activeStudentCount: 498,
     evaluationCriteria: STANDARD_CRITERIA("Python programming"),
     modules: [
@@ -1381,13 +1394,14 @@ const COURSES: SeedCourse[] = [
     courseId: "ai-ml-foundations",
     bannerUrl: "/course-banners/ai-ml-foundations.svg",
     price: 1999,
-    title: "AI & Machine Learning Foundations",
+    domainTags: ["ai-ml"],
+    skillLevel: "beginner",
+    title: "Foundations · AI & Machine Learning: Your First Models",
     description:
       "Build a solid foundation in machine learning — from data wrangling and classical algorithms to model evaluation — training your first real models with pandas and scikit-learn.",
-    authorName: "Dr. Meera Iyer",
     badge: "Beginner Friendly",
     totalDays: 20,
-    rating: 4.8,
+    rating: 3.1,
     activeStudentCount: 412,
     evaluationCriteria: STANDARD_CRITERIA("machine learning"),
     modules: [
@@ -1496,13 +1510,14 @@ const COURSES: SeedCourse[] = [
     courseId: "fullstack-development-fundamentals",
     bannerUrl: "/course-banners/fullstack-development-fundamentals.svg",
     price: 1999,
-    title: "Full-Stack Development Fundamentals",
+    domainTags: ["full-stack"],
+    skillLevel: "beginner",
+    title: "Foundations · Full-Stack Development: The MERN Track",
     description:
       "Your on-ramp to full-stack development — HTML/CSS/JavaScript fundamentals, a Node/Express backend, and connecting a real frontend to a real API.",
-    authorName: "Ravi Chandran",
     badge: "Beginner Friendly",
     totalDays: 18,
-    rating: 4.7,
+    rating: 4.4,
     activeStudentCount: 389,
     evaluationCriteria: STANDARD_CRITERIA("full-stack development"),
     modules: [
@@ -1614,13 +1629,14 @@ const COURSES: SeedCourse[] = [
     courseId: "devops-engineering-fundamentals",
     bannerUrl: "/course-banners/devops-engineering-fundamentals.svg",
     price: 1499,
-    title: "DevOps Engineering Fundamentals",
+    domainTags: ["devops-cloud"],
+    skillLevel: "beginner",
+    title: "Foundations · DevOps & Cloud: Git, Docker & CI/CD Basics",
     description:
       "Learn the DevOps mindset and toolchain from scratch — Git collaboration workflows, your first Docker container, and a simple automated CI/CD pipeline.",
-    authorName: "James Okafor",
     badge: "Beginner Friendly",
     totalDays: 16,
-    rating: 4.7,
+    rating: 4.3,
     activeStudentCount: 301,
     evaluationCriteria: STANDARD_CRITERIA("DevOps engineering"),
     modules: [
@@ -1731,10 +1747,11 @@ export async function seedCourses() {
         $set: {
           title: course.title,
           description: course.description,
-          authorName: course.authorName,
           bannerUrl: course.bannerUrl,
           price: course.price,
           badge: course.badge,
+          domainTags: course.domainTags,
+          skillLevel: course.skillLevel,
           totalDays: course.totalDays,
           rating: course.rating,
           activeStudentCount: course.activeStudentCount,

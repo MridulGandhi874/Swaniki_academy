@@ -7,6 +7,8 @@ import InProgressCourseRow from "@/components/dashboard/InProgressCourseRow";
 import CourseCard from "@/components/courses/CourseCard";
 import EmptyState from "@/components/ui/EmptyState";
 import Skeleton from "@/components/ui/Skeleton";
+import OnboardingBanner from "@/components/dashboard/OnboardingBanner";
+import RecommendedSection from "@/components/courses/RecommendedSection";
 
 interface EnrolledCourse {
   courseId: string;
@@ -47,7 +49,7 @@ function CheckIcon() {
 }
 
 export default function DashboardOverviewPage() {
-  const { firebaseUser } = useAuth();
+  const { firebaseUser, mongoUser } = useAuth();
   const [courses, setCourses] = useState<EnrolledCourse[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -73,10 +75,16 @@ export default function DashboardOverviewPage() {
 
   return (
     <div>
+      {mongoUser?.onboardingSkipped && !mongoUser.onboardingCompleted && <OnboardingBanner />}
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <MetricCard label="Enrolled Courses" value={courses.length} icon={<BookIcon />} />
         <MetricCard label="Active Courses" value={activeCourses.length} icon={<ClockIcon />} />
         <MetricCard label="Completed Courses" value={completedCourses.length} icon={<CheckIcon />} />
+      </div>
+
+      <div className="mt-10">
+        <RecommendedSection />
       </div>
 
       <div className="mt-10">

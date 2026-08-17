@@ -30,9 +30,10 @@ export interface CourseDraft {
   title: string;
   description: string;
   bannerUrl: string;
-  authorName: string;
   price: number;
   badge: string;
+  domainTags: string[];
+  skillLevel: "beginner" | "intermediate" | "advanced";
   totalDays: number;
   rating: number;
   active: boolean;
@@ -78,9 +79,10 @@ export function draftToApiPayload(draft: CourseDraft) {
     title: draft.title.trim(),
     description: draft.description,
     bannerUrl: draft.bannerUrl,
-    authorName: draft.authorName,
     price: draft.price,
     badge: draft.badge,
+    domainTags: draft.domainTags,
+    skillLevel: draft.skillLevel,
     totalDays: draft.totalDays,
     rating: draft.rating,
     active: draft.active,
@@ -129,9 +131,10 @@ export interface ApiCourse {
   title: string;
   description?: string;
   bannerUrl?: string;
-  authorName?: string;
   price?: number;
   badge?: string;
+  domainTags?: string[];
+  skillLevel?: "beginner" | "intermediate" | "advanced";
   totalDays?: number;
   rating?: number;
   active?: boolean;
@@ -145,9 +148,10 @@ export function apiCourseToDraft(course: ApiCourse): CourseDraft {
     title: course.title,
     description: course.description ?? "",
     bannerUrl: course.bannerUrl ?? "",
-    authorName: course.authorName ?? "",
     price: course.price ?? 0,
     badge: course.badge ?? "",
+    domainTags: course.domainTags ?? [],
+    skillLevel: course.skillLevel ?? "beginner",
     totalDays: course.totalDays ?? 14,
     rating: course.rating ?? 0,
     active: course.active ?? true,
@@ -178,17 +182,25 @@ export function apiCourseToDraft(course: ApiCourse): CourseDraft {
   };
 }
 
+// Ratings are drawn once from a credible 3.0-4.5 range rather than a
+// suspiciously-perfect 4.7-4.9 band — this seeds a sensible default for a
+// brand-new course; the admin can still override it.
+export function randomSeedRating(): number {
+  return Math.round((3.0 + Math.random() * 1.5) * 10) / 10;
+}
+
 export function emptyCourse(): CourseDraft {
   return {
     courseId: "",
     title: "",
     description: "",
     bannerUrl: "",
-    authorName: "",
     price: 1999,
     badge: "",
+    domainTags: [],
+    skillLevel: "beginner",
     totalDays: 14,
-    rating: 4.5,
+    rating: randomSeedRating(),
     active: true,
     evaluationCriteria: defaultEvaluationCriteria(),
     modules: [emptyModule(1)],

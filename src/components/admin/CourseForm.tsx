@@ -4,6 +4,7 @@ import { useState } from "react";
 import { type CourseDraft, type EvaluationCriterionDraft, emptyModule } from "./types";
 import ModuleEditor from "./ModuleEditor";
 import Button from "@/components/ui/Button";
+import { SPECIALIZATIONS, SKILL_LEVEL_OPTIONS } from "@/lib/domains";
 
 interface CourseFormProps {
   initialData: CourseDraft;
@@ -48,6 +49,15 @@ export default function CourseForm({ initialData, onSubmit, submitLabel, lockCou
 
   const criteriaWeightSum = draft.evaluationCriteria.reduce((sum, c) => sum + (Number(c.weight) || 0), 0);
 
+  function toggleDomainTag(value: string) {
+    setDraft((d) => ({
+      ...d,
+      domainTags: d.domainTags.includes(value)
+        ? d.domainTags.filter((t) => t !== value)
+        : [...d.domainTags, value],
+    }));
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrorMsg(null);
@@ -71,6 +81,9 @@ export default function CourseForm({ initialData, onSubmit, submitLabel, lockCou
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="rounded-2xl border border-gray-200 p-6">
         <h2 className="text-sm font-semibold text-gray-900">Course details</h2>
+        <p className="mt-1 text-xs text-gray-400">
+          Every course is published as Swaniki Academy — there&rsquo;s no per-course instructor to set.
+        </p>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className={labelClass}>Course ID (slug, unique)</label>
@@ -110,12 +123,20 @@ export default function CourseForm({ initialData, onSubmit, submitLabel, lockCou
             />
           </div>
           <div>
-            <label className={labelClass}>Author name</label>
-            <input
+            <label className={labelClass}>Skill level</label>
+            <select
               className={inputClass}
-              value={draft.authorName}
-              onChange={(e) => setDraft({ ...draft, authorName: e.target.value })}
-            />
+              value={draft.skillLevel}
+              onChange={(e) =>
+                setDraft({ ...draft, skillLevel: e.target.value as CourseDraft["skillLevel"] })
+              }
+            >
+              {SKILL_LEVEL_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className={labelClass}>Price (₹)</label>
@@ -160,6 +181,31 @@ export default function CourseForm({ initialData, onSubmit, submitLabel, lockCou
               value={draft.totalDays}
               onChange={(e) => setDraft({ ...draft, totalDays: Number(e.target.value) })}
             />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>Specialization tags</label>
+            <p className="mb-2 text-xs text-gray-400">
+              Used to match this course to trainees in &ldquo;Recommended for You.&rdquo;
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {SPECIALIZATIONS.map((opt) => {
+                const active = draft.domainTags.includes(opt.value);
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => toggleDomainTag(opt.value)}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                      active
+                        ? "border-blue-600 bg-blue-50 text-blue-700"
+                        : "border-gray-200 text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           <div className="flex items-end">
             <label className="flex items-center gap-2 text-sm text-gray-700">

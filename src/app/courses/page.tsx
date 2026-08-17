@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import CourseCard, { type CourseCardData } from "@/components/courses/CourseCard";
+import RecommendedSection from "@/components/courses/RecommendedSection";
 import SortFilterBar from "@/components/courses/SortFilterBar";
 import Pagination from "@/components/ui/Pagination";
 import EmptyState from "@/components/ui/EmptyState";
@@ -98,6 +99,12 @@ export default function CoursesPage() {
         <h1 className="text-3xl font-bold text-gray-900">Program Tracks</h1>
         <p className="mt-2 text-gray-500">Browse trainee tracks and start building today.</p>
       </div>
+
+      {!search.trim() && (
+        <div className="mb-10">
+          <RecommendedSection />
+        </div>
+      )}
 
       <SortFilterBar
         sort={sort}
